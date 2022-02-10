@@ -3,13 +3,16 @@ const { get } = require('express/lib/response');
 const getdb = require('../utils/database').getDb
 module.exports = class Seller {
 
-    constructor(email, password, type) {
+    constructor(email, password, type, catalog) {
 
         this.email = email;
 
         this.password = password;
 
         this.type = type;
+
+        this.catalog = [];
+
 
 
 

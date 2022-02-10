@@ -13,7 +13,7 @@ router.post('/api/auth/register', (req, resp, next) => {
     const password = req.body.password
     const type = req.body.type;
     if (type === "seller") {
-        const seller = new Seller(email, password, type);
+        const seller = new Seller(email, password, type, null);
 
         seller.createSeller().then((result) => {
 
