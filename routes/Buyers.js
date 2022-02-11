@@ -11,6 +11,9 @@ router.get('/api/buyer/list-of-sellers', (req, resp, next) => {
     })
 
 })
+router.get('/api/buyer/seller-catalog/:seller_id', (req, resp, next) => {
+
+})
 
 
 module.exports = router;
