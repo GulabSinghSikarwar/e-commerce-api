@@ -28,9 +28,9 @@ router.post('/api/auth/register', (req, resp, next) => {
         })
     } else {
 
-        const buyer = new Buyer(email, password, type);
+        let buyer = new Buyer(email, password, type);
 
-        buyer.createBuyer().then((result) => {
+        buyer.create_Buyer().then((result) => {
 
 
             resp.status(201).json(result)

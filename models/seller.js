@@ -46,9 +46,39 @@ module.exports = class Seller {
         .findOne({ _id: new mongodb.ObjectId(id) })
 
         .then((seller) => {
+            let updatedCatalog = [...seller.catalog];
+
+            let prevCatlog = [...seller.catalog];
+            console.log();
+
+            if (prevCatlog.length > 0) {
+                console.log("length ", prevCatlog.length);
+
+                newCatalogProducts.forEach(product => {
+                    let a_product = updatedCatalog.find((ele) => {
+                        return product.name === ele.name
+                    })
+
+                    if (!a_product) {
+                        updatedCatalog.push(product)
+
+                    }
+                    console.log(updatedCatalog);
 
 
-            let updatedCatalog = [...seller.catalog, ...newCatalogProducts];
+
+
+
+                });
+            } else {
+                console.log("length : 0");
+                updatedCatalog = [...newCatalogProducts]
+            }
+
+
+
+
+
 
             return db.collection("User").updateOne({ _id: new mongodb.ObjectId(id) }, {
                 $set: {
@@ -62,5 +92,13 @@ module.exports = class Seller {
             }).catch((err) => { console.log(err); });
 
         });
+    }
+
+    static getOrders(id) {
+        const db = getdb();
+        return db.collection('User').findOne({ _id: new mongodb.ObjectId(id) }).then((seller) => {
+            return seller.orders;
+
+        })
     }
 };

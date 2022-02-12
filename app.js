@@ -16,6 +16,41 @@ const seller = require('./routes/Seller')
 
 
 
+const session = require("express-session");
+
+const mongodbStore = require("connect-mongodb-session")(session);
+
+
+
+
+
+
+const URI = "mongodb://127.0.0.1:27017/Unity_user_sessions";
+
+const store = new mongodbStore({
+    uri: URI,
+    collection: "sessions"
+})
+
+app.use(
+    session({
+        secret: "my session-session ",
+        resave: false,
+        saveUninitialized: false,
+        store: store,
+
+
+
+
+    })
+
+
+);
+
+
+
+
+
 app.use(bodyParser.json())
 
 // Auth API 
